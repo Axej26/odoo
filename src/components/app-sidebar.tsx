@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import {
   ShoppingCart,
   ContactRound,
@@ -9,15 +10,12 @@ import {
   Settings,
   Info,
   SearchSlash,
-  Building2, // <-- este lo usaremos como reemplazo
-  ChartBar
+  Building2,
+  ChartBar,
 } from "lucide-react"
 
 
-import { NavDocuments } from "@/components/nav-documents"
-import { NavMain } from "@/components/nav-main"
 import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
   SidebarContent,
@@ -27,6 +25,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { NavUser } from "./nav-user"
+
+
+interface NavItem {
+  title: string
+  url: string
+  icon: React.ElementType
+}
+
 
 const data = {
   user: {
@@ -35,36 +42,32 @@ const data = {
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
-
     {
-  title: "Dashboard",
-    url:"#",
-    icon: ChartBar,
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: ChartBar,
     },
-  
     {
       title: "Productos",
-      url: "#",
+      url: "/dashboard/product",
       icon: ShoppingCart,
     },
     {
       title: "Clientes",
-      url: "#",
+      url: "/dashboard/customers",
       icon: ContactRound,
     },
     {
       title: "Usuarios",
-      url: "#",
+      url: "/dashboard/user",
       icon: UserPlus,
     },
     {
       title: "Ventas",
-      url: "#",
+      url: "/dashboard/sale",
       icon: BanknoteArrowUp,
     },
-   
   ],
- 
   navSecondary: [
     {
       title: "Settings",
@@ -82,9 +85,30 @@ const data = {
       icon: SearchSlash,
     },
   ],
- 
 }
 
+
+function NavMain({ items }: { items: NavItem[] }) {
+  return (
+    <nav className="space-y-1">
+      {items.map((item, index) => {
+        const Icon = item.icon
+        return (
+          <Link
+            key={index}
+            href={item.url}
+            className="flex items-center gap-3 rounded-md px-4 py-2 hover:bg-muted transition"
+          >
+            <Icon className="size-5 text-muted-foreground" />
+            <span className="text-sm font-medium">{item.title}</span>
+          </Link>
+        )
+      })}
+    </nav>
+  )
+}
+
+// ✅ Componente principal del sidebar
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -95,19 +119,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
-                <Building2 className="!size-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
-              </a>
+              <Link href="/">
+                <span className="flex items-center gap-2">
+                  <Building2 className="!size-5" />
+                  <span className="text-base font-semibold">Acme Inc.</span>
+                </span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
         <NavMain items={data.navMain} />
-      
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
+
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
