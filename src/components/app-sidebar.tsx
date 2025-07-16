@@ -15,8 +15,7 @@ import {
   type LucideIcon,
 } from "lucide-react"
 
-
-import { NavSecondary } from "@/components/nav-secondary"
+import { NavSecondary, NavItem } from "@/components/nav-secondary"
 import {
   Sidebar,
   SidebarContent,
@@ -28,10 +27,8 @@ import {
 } from "@/components/ui/sidebar"
 import { NavUser } from "./nav-user"
 
-interface NavItem {
-  title: string
-  url: string
-  icon: LucideIcon
+interface NavMainProps {
+  items: NavItem[]
 }
 
 const data = {
@@ -54,7 +51,7 @@ const data = {
   ],
 }
 
-function NavMain({ items }: { items: NavItem[] }) {
+function NavMain({ items }: NavMainProps) {
   return (
     <nav className="space-y-1">
       {items.map((item, index) => {
