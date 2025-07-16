@@ -12,7 +12,6 @@ import {
   SearchSlash,
   Building2,
   ChartBar,
-  type LucideIcon,
 } from "lucide-react"
 
 import { NavSecondary, NavItem } from "@/components/nav-secondary"
