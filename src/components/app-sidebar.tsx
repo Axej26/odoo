@@ -12,6 +12,7 @@ import {
   SearchSlash,
   Building2,
   ChartBar,
+  type LucideIcon,
 } from "lucide-react"
 
 
@@ -27,13 +28,11 @@ import {
 } from "@/components/ui/sidebar"
 import { NavUser } from "./nav-user"
 
-
 interface NavItem {
   title: string
   url: string
-  icon: React.ElementType
+  icon: LucideIcon
 }
-
 
 const data = {
   user: {
@@ -42,51 +41,18 @@ const data = {
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
-    {
-      title: "Dashboard",
-      url: "/dashboard",
-      icon: ChartBar,
-    },
-    {
-      title: "Productos",
-      url: "/dashboard/product",
-      icon: ShoppingCart,
-    },
-    {
-      title: "Clientes",
-      url: "/dashboard/customers",
-      icon: ContactRound,
-    },
-    {
-      title: "Usuarios",
-      url: "/dashboard/user",
-      icon: UserPlus,
-    },
-    {
-      title: "Ventas",
-      url: "/dashboard/sale",
-      icon: BanknoteArrowUp,
-    },
+    { title: "Dashboard", url: "/dashboard", icon: ChartBar },
+    { title: "Productos", url: "/dashboard/product", icon: ShoppingCart },
+    { title: "Clientes", url: "/dashboard/customers", icon: ContactRound },
+    { title: "Usuarios", url: "/dashboard/user", icon: UserPlus },
+    { title: "Ventas", url: "/dashboard/sale", icon: BanknoteArrowUp },
   ],
   navSecondary: [
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings,
-    },
-    {
-      title: "Get Help",
-      url: "#",
-      icon: Info,
-    },
-    {
-      title: "Search",
-      url: "#",
-      icon: SearchSlash,
-    },
+    { title: "Settings", url: "#", icon: Settings },
+    { title: "Get Help", url: "#", icon: Info },
+    { title: "Search", url: "#", icon: SearchSlash },
   ],
 }
-
 
 function NavMain({ items }: { items: NavItem[] }) {
   return (
@@ -108,7 +74,6 @@ function NavMain({ items }: { items: NavItem[] }) {
   )
 }
 
-// ✅ Componente principal del sidebar
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
