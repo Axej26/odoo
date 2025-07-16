@@ -7,7 +7,7 @@ import {
 
 
 
-export default function User() {
+export default function Product() {
   return (
     <SidebarProvider
       style={
@@ -21,7 +21,7 @@ export default function User() {
       <SidebarInset>
         <SiteHeader />
         
-           <h1>User</h1>
+           <h1>Productos</h1>
             
               
               
