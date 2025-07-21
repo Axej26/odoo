@@ -4,19 +4,17 @@ import * as React from "react"
 import {
   IconCamera,
   IconChartBar,
-  IconDashboard,
-  IconDatabase,
   IconFileAi,
   IconFileDescription,
-  IconFileWord,
   IconFolder,
   IconHelp,
   IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
+  IconUser,
   IconSearch,
   IconSettings,
   IconUsers,
+  IconShoppingBag,
+  IconUsersPlus,
 } from "@tabler/icons-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -42,22 +40,22 @@ const data = {
     {
       title: "Dashboard",
       url: "/dashboard",
-      icon: IconDashboard,
+      icon: IconChartBar,
     },
     {
       title: "Productos",
       url: "/dashboard/product",
-      icon: IconListDetails,
+      icon: IconShoppingBag,
     },
     {
       title: "Clientes",
       url: "/dashboard/customers",
-      icon: IconChartBar,
+      icon: IconUser,
     },
     {
       title: "Usuarios",
       url: "/dashboard/user",
-      icon: IconFolder,
+      icon: IconUsersPlus,
     },
     {
       title: "Ventas",
