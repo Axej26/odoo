@@ -11,7 +11,7 @@ import {
   IconUser,
   IconSearch,
   IconSettings,
-  IconUsers,
+  IconShoppingCart,
   IconShoppingBag,
   IconUsersPlus,
 } from "@tabler/icons-react"
@@ -59,7 +59,7 @@ const data = {
     {
       title: "Ventas",
       url: "/dashboard/sale",
-      icon: IconUsers,
+      icon: IconShoppingCart,
     },
   ],
   navClouds: [
