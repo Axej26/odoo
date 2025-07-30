@@ -51,19 +51,25 @@ return {
     strategy: "jwt",
   },
   callbacks: {
-   async jwt({ token, user }) {
+  async jwt({ token, user }: { token: any; user?: { id: string; roleId?: number; role?: string } }) {
   if (user) {
     token.id = user.id;
+    token.roleId = user.roleId;
+    token.role = user.role;
   }
   return token;
 },
 
-  async session({ session, token }) {
+
+  async session({ session, token }: { session: any; token: any }) {
   if (token && session.user) {
-    (session.user as any).id = token.id;
+    session.user.id = token.id;
+    session.user.roleId = token.roleId;
+    session.user.role = token.role;
   }
   return session;
 },
+
 
   },
   secret: process.env.NEXTAUTH_SECRET,
