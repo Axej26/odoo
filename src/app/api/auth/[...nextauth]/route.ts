@@ -2,7 +2,19 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import pool from "@/lib/db";
 import bcrypt from "bcryptjs";
+import type { JWT } from "next-auth/jwt";
+import type { Session, User } from "next-auth";
+interface MyToken extends JWT {
+  id?: string;
+  roleId?: number;
+  role?: string;
+}
 
+interface MyUser extends User {
+  id: string;
+  roleId?: number;
+  role?: string;
+}
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -50,28 +62,26 @@ return {
   session: {
     strategy: "jwt",
   },
-  callbacks: {
-  async jwt({ token, user }: { token: any; user?: { id: string; roleId?: number; role?: string } }) {
-  if (user) {
-    token.id = user.id;
-    token.roleId = user.roleId;
-    token.role = user.role;
-  }
-  return token;
-},
+ callbacks: {
+  async jwt({ token, user }: { token: MyToken; user?: MyUser }) {
+    if (user) {
+      token.id = user.id;
+      token.roleId = user.roleId;
+      token.role = user.role;
+    }
+    return token;
+  },
 
-
-  async session({ session, token }: { session: any; token: any }) {
+  async session({ session, token }: { session: Session; token: MyToken }) {
   if (token && session.user) {
-    session.user.id = token.id;
-    session.user.roleId = token.roleId;
-    session.user.role = token.role;
+    const user = session.user as MyUser;
+    user.id = token.id ?? "";
+    user.roleId = token.roleId;
+    user.role = token.role;
   }
   return session;
 },
-
-
-  },
+},
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
