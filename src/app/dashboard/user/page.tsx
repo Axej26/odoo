@@ -1,9 +1,5 @@
 "use client"
-
-import { AppSidebar } from "@/components/app-sidebar"
-import { SiteHeader } from "@/components/site-header"
 import { Button } from "@/components/ui/button"
-
 import {
   Card,
   CardContent,
@@ -14,10 +10,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar"
+
 
 import { useEffect, useState } from "react"
 import { toast, Toaster } from "sonner"
@@ -36,9 +29,6 @@ export default function User() {
  const [Gmail,setGmail]=useState("")
  const [password, setPassword] = useState("") // contraseña original
 const [passwordConfirm, setPasswordConfirm] = useState("") // confirmación
-
-
-
 
  useEffect(() => {
     const fetchRoles = async () => {
@@ -100,19 +90,7 @@ const [passwordConfirm, setPasswordConfirm] = useState("") // confirmación
    }
 
   return (
-    <SidebarProvider
     
-      style={
-        {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
-          "--header-height": "calc(var(--spacing) * 12)",
-        } as React.CSSProperties
-      }
-    >
-  <Toaster position="top-center" richColors /> 
-      <AppSidebar variant="inset" />
-      <SidebarInset>
-        <SiteHeader />
         
          <div className="flex items-center justify-center min-h-[calc(100vh-var(--header-height))] px-4">
     <Card className="w-full max-w-sm">
@@ -180,7 +158,6 @@ const [passwordConfirm, setPasswordConfirm] = useState("") // confirmación
              
          
         
-      </SidebarInset>
-    </SidebarProvider>
+    
   )
 }
