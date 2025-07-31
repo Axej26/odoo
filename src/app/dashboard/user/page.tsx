@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label"
 
 
 import { useEffect, useState } from "react"
-import { toast, Toaster } from "sonner"
+import { toast} from "sonner"
 
 type Rol={
    id_role: number
